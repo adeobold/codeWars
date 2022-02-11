@@ -20,13 +20,55 @@ public class Training {
                 true, true, true, true,
                 false, false, true, true};
 
-        System.out.println(Arrays.toString(sumParts(new int[] {0, 1, 3, 6, 10})));
-
-
+        System.out.println(reverseWords("af b c d"));
 
 
     }
 
+
+    public static String reverseWords(final String original) {
+        //Complete the function that accepts a string parameter, and reverses each word in the string. All spaces in the string should be retained.
+
+        //String[] array = original.split(" ");
+        //
+        //    if(array.length == 0)
+        //        return original;
+        //
+        //
+        //    int i = 0;
+        //    for(String string : array){
+        //        array[i] = new StringBuilder(string).reverse().toString();
+        //        i++;
+        //    }
+        //
+        //    return String.join(" ",array);
+
+        String result = "";
+        String word = "";
+
+        for (char ch : original.toCharArray()) {
+
+            if (ch == ' ') {
+                if (word != "") {
+                    StringBuilder sb = new StringBuilder(word);
+                    result += sb.reverse();
+                    word = "";
+                }
+                result += ch;
+            } else {
+                word += ch;
+            }
+
+        }
+
+        if (word != "") {
+            StringBuilder sb = new StringBuilder(word);
+            result += sb.reverse();
+        }
+
+        return result;
+
+    }
 
 
     public static int[] sumParts(int[] ls) {
@@ -97,6 +139,7 @@ public class Training {
         }
 
     }
+
     public static List<Long> john(long n) {
 
 //        List<Long> result = new ArrayList<>();
@@ -107,9 +150,10 @@ public class Training {
 //
 //        return result;
 
-        return aj(n,"j");
+        return aj(n, "j");
 
     }
+
     public static List<Long> ann(long n) {
 
 //        List<Long> result = new ArrayList<>();
@@ -120,12 +164,14 @@ public class Training {
 //
 //        return result;
 
-        return aj(n,"a");
+        return aj(n, "a");
 
     }
+
     public static long sumJohn(long n) {
         return john(n).stream().reduce(0l, (a, b) -> a + b);
     }
+
     public static long sumAnn(long n) {
         return ann(n).stream().reduce(0l, (a, b) -> a + b);
     }
@@ -139,7 +185,7 @@ public class Training {
         //The returned format must be correct in order to complete this challenge.
         //Don't forget the space after the closing parentheses!
 
-        return  "(" + numbers[0] + numbers[1] + numbers[2] + ") " +
+        return "(" + numbers[0] + numbers[1] + numbers[2] + ") " +
                 numbers[3] + numbers[4] + numbers[5] + "-" +
                 numbers[6] + numbers[7] + numbers[8] + numbers[9];
 
