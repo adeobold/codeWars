@@ -20,16 +20,29 @@ public class Training {
                 true, true, true, true,
                 false, false, true, true};
 
-        System.out.println(Arrays.toString(john(11).toArray()));
-        System.out.println(Arrays.toString(ann(6).toArray()));
-        System.out.println(sumJohn(75));
-        System.out.println(sumAnn(150));
+        System.out.println(Arrays.toString(sumParts(new int[] {0, 1, 3, 6, 10})));
+
 
 
 
     }
 
-    
+
+
+    public static int[] sumParts(int[] ls) {
+
+        int[] result = new int[ls.length + 1];
+
+        int sum = 0;
+        for (int i = ls.length - 1; i >= 0; i--) {
+            sum += ls[i];
+            result[i] = sum;
+        }
+
+        return result;
+
+    }
+
     //John and his wife Ann have decided to go to Codewars. On the first day Ann will do one kata and John - he wants to know how it is working - 0 kata.
     //
     //Let us call a(n) - and j(n) - the number of katas done by Ann - and John - at day n. We have a(0) = 1 and in the same manner j(0) = 0.
