@@ -20,8 +20,103 @@ public class Training {
                 true, true, true, true,
                 false, false, true, true};
 
-        System.out.println(createPhoneNumber(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}));
+        System.out.println(Arrays.toString(john(11).toArray()));
+        System.out.println(Arrays.toString(ann(6).toArray()));
+        System.out.println(sumJohn(75));
+        System.out.println(sumAnn(150));
+
+
+
     }
+
+    
+    //John and his wife Ann have decided to go to Codewars. On the first day Ann will do one kata and John - he wants to know how it is working - 0 kata.
+    //
+    //Let us call a(n) - and j(n) - the number of katas done by Ann - and John - at day n. We have a(0) = 1 and in the same manner j(0) = 0.
+    //
+    //They have chosen the following rules:
+    //
+    //On day n the number of katas done by Ann should be n minus the number of katas done by John at day t, t being equal to the number of katas done by Ann herself at day n - 1
+    //
+    //On day n the number of katas done by John should be n minus the number of katas done by Ann at day t, t being equal to the number of katas done by John himself at day n - 1
+    //
+    //Whoops! I think they need to lay out a little clearer exactly what there're getting themselves into!
+    //
+    //Could you write:
+    //functions ann(n) and john(n) that return the list of the number of katas Ann/John does on the first n days;
+    //functions sum_ann(n) and sum_john(n) that return the total number of katas done by Ann/John on the first n days
+//    public static Long j(long n) {
+//        if (n == 0){
+//            return 0l;
+//        }
+//        return n - a(j(n - 1));
+//    }
+//
+//    public static Long a(long n) {
+//        if (n == 0){
+//            return 1l;
+//        }
+//        return n - j(a(n - 1));
+//    }
+    public static List<Long> aj(long n, String whoIs) {
+
+        List<Long> a = new ArrayList<>();
+        List<Long> j = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+
+            if (i == 0) {
+                a.add(1l);
+                j.add(0l);
+            } else {
+
+                j.add(i - a.get(Math.toIntExact(j.get(i - 1))));
+                a.add(i - j.get(Math.toIntExact(a.get(i - 1))));
+
+            }
+
+        }
+
+        if (whoIs == "a") {
+            return a;
+        } else {
+            return j;
+        }
+
+    }
+    public static List<Long> john(long n) {
+
+//        List<Long> result = new ArrayList<>();
+//
+//        for (int i = 0; i < n; i++) {
+//            result.add(j(i));
+//        }
+//
+//        return result;
+
+        return aj(n,"j");
+
+    }
+    public static List<Long> ann(long n) {
+
+//        List<Long> result = new ArrayList<>();
+//
+//        for (int i = 0; i < n; i++) {
+//            result.add(a(i));
+//        }
+//
+//        return result;
+
+        return aj(n,"a");
+
+    }
+    public static long sumJohn(long n) {
+        return john(n).stream().reduce(0l, (a, b) -> a + b);
+    }
+    public static long sumAnn(long n) {
+        return ann(n).stream().reduce(0l, (a, b) -> a + b);
+    }
+
 
     public static String createPhoneNumber(int[] numbers) {
         // Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers in the form of a phone number.
