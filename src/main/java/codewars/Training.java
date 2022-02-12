@@ -20,9 +20,69 @@ public class Training {
                 true, true, true, true,
                 false, false, true, true};
 
-        System.out.println(reverseWords("af b c d"));
+        //System.out.println(Arrays.toString(productFib(1)));
+        System.out.println(fibonacci(3));
+
+    }
 
 
+    public static long[] productFib(long prod) {
+        //https://www.codewars.com/kata/5541f58a944b85ce6d00006a/train/java
+        long[] result = new long[3];
+        long n = 0;
+
+        while (fibonacci(n) * fibonacci(n + 1) <= prod) {
+            if (fibonacci(n) * fibonacci(n + 1) == prod) {
+                result[0] = fibonacci(n);
+                result[1] = fibonacci(n + 1);
+            } else {
+                result[0] = fibonacci(n + 1);
+                result[1] = fibonacci(n + 2);
+            }
+
+            n++;
+        }
+
+        if (result[0] * result[1] == prod) {
+            result[2] = 1;
+        } else {
+            result[2] = 0;
+        }
+
+        return result;
+    }
+    public static long fibonacci(long n) {
+
+        long result = 0;
+
+        long elemMinus2 = 0;
+        long elemMinus1 = 1;
+        long elemCurrent = 0;
+
+        if (n == 0) {
+            elemCurrent = 0;
+        } else if (n == 1) {
+            elemCurrent = 1;
+        }
+
+        for (int i = 2; i <= n; i++) {
+
+            elemCurrent = elemMinus2 + elemMinus1;
+
+            elemMinus2 = elemMinus1;
+            elemMinus1 = elemCurrent;
+
+        }
+
+        return elemCurrent;
+
+//        if (n == 0) {
+//            return 0;
+//        } else if (n == 1) {
+//            return 1;
+//        } else {
+//            return fibonacci(n - 1) + fibonacci(n - 2);
+//        }
     }
 
 
@@ -69,7 +129,6 @@ public class Training {
         return result;
 
     }
-
 
     public static int[] sumParts(int[] ls) {
 
