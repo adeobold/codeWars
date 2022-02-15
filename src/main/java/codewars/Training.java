@@ -21,8 +21,90 @@ public class Training {
                 false, false, true, true};
 
         //System.out.println(Arrays.toString(productFib(1)));
-        System.out.println(fibonacci(3));
+        System.out.println(findNb(135440716410000L));
 
+    }
+
+
+    public static long findNb(long m) {
+
+        // find n that n^3 + (n-1)^3 + (n-2)^3 + ... + 1^3 == m
+
+        long result = 1;
+
+        Long i = 2l;
+
+        while (result < m) {
+
+            result += i * i * i;
+
+            i++;
+
+        }
+
+        if (result == m) {
+            return i - 1;
+        } else {
+            return -1l;
+        }
+
+    }
+
+
+    public static String decode(String r) {
+
+        //https://www.codewars.com/kata/5dad6e5264e25a001918a1fc/train/java
+
+        String result = "";
+        String stringNum = "";
+        String code = "";
+        Integer num;
+
+        for (Character ch : r.toCharArray()) {
+            if (Pattern.matches("[0123456789]", ch.toString())) {
+                stringNum += ch;
+            } else {
+                code += ch;
+            }
+        }
+
+        num = Integer.parseInt(stringNum);
+
+        for (Character ch : code.toCharArray()) {
+
+            int charCode = -1;
+
+            for (int i = 0; i < 25; i++) {
+                if (i * num % 26 == (int) ch - 97) {
+                    charCode = i;
+                    break;
+                }
+            }
+
+            if (charCode == -1) {
+                return "Impossible to decode";
+            } else {
+                result += (char) (charCode + 97);
+            }
+
+        }
+
+        if (5057 % 26 % 13 == 0) {
+            return "Impossible to decode";
+        }
+
+        return result;
+
+    }
+
+
+    public static long[] bonus(int[] arr, long s) {
+
+        //System.out.println(bonus(new int[] {22, 3, 15}, 18228));
+        //https://www.codewars.com/kata/5d68d05e7a60ba002b0053f6/train/java
+
+
+        return null;
     }
 
 
@@ -51,6 +133,7 @@ public class Training {
 
         return result;
     }
+
     public static long fibonacci(long n) {
 
         long result = 0;
