@@ -21,8 +21,27 @@ public class Training {
                 false, false, true, true};
 
         //System.out.println(Arrays.toString(productFib(1)));
-        System.out.println(findNb(135440716410000L));
+        System.out.println(GetSum(0, 5));
 
+    }
+
+
+    public static int GetSum(int a, int b) {
+        //Given two integers a and b, which can be positive or negative, find the sum of all the integers between and including them and return it. If the two numbers are equal return a or b.
+        //
+        //Note: a and b are not ordered!
+
+        int result = 0;
+
+        if (a == b) {
+            return a;
+        }
+
+        for (int i = Math.min(a, b); i <= Math.max(a, b); i++) {
+            result += i;
+        }
+
+        return result;
     }
 
 
