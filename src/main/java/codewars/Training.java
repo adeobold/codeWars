@@ -23,7 +23,26 @@ public class Training {
         //System.out.println(Arrays.toString(wave("two words")));
         //System.out.println(sequence(new int[]{-2, 1, 1, 4, -1, 2, 1, -5, 4}));
 
-        System.out.println(findEvenIndex(new int[] {1,2,3,4,3,2,1}));
+        System.out.println(camelCase("camelcasingtest"));
+
+    }
+
+    public static String camelCase(String input) {
+
+        String result = "";
+
+        char[] arr = input.toCharArray();
+
+        for (char c : arr) {
+            if (Character.isUpperCase(c)) {
+                result += " ";
+            }
+            result += c;
+        }
+
+        return result;
+
+        //return input.replaceAll("([A-Z])", " $1");
 
     }
 
