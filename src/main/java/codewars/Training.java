@@ -20,12 +20,38 @@ public class Training {
                 true, true, true, true,
                 false, false, true, true};
 
-        //System.out.println(Arrays.toString(wave("two words")));
+        System.out.println(Arrays.toString(tribonacci(new double []{1,1,1},10)));
         //System.out.println(sequence(new int[]{-2, 1, 1, 4, -1, 2, 1, -5, 4}));
-
-        System.out.println(camelCase("camelcasingtest"));
+        //System.out.println(camelCase("camelcasingtest"));
 
     }
+
+    public static double[] tribonacci(double[] s, int n) {
+
+        double[] result = new double[n];
+
+        if (n <= 0) return result;
+
+        if (s.length == 0) return result;
+
+        for (int i = 0; i < n; i++) {
+
+            if (i == 0) {
+                result[0] = s[0];
+            } else if (i == 1) {
+                result[1] = s[1];
+            } else if (i == 2) {
+                result[2] = s[2];
+            } else {
+                result[i] = result[i-1] + result[i-2]+ result[i-3];
+            }
+
+        }
+
+        return result;
+
+    }
+
 
     public static String camelCase(String input) {
 
