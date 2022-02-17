@@ -23,7 +23,31 @@ public class Training {
         //System.out.println(Arrays.toString(wave("two words")));
         //System.out.println(sequence(new int[]{-2, 1, 1, 4, -1, 2, 1, -5, 4}));
 
-        System.out.println(longest("aretheyhere", "yestheyarehere"));
+        System.out.println(findEvenIndex(new int[] {1,2,3,4,3,2,1}));
+
+    }
+
+
+    public static int findEvenIndex(int[] arr) {
+
+        for (int i = 0; i < arr.length; i++) {
+
+            int leftSum = 0;
+            int rightSum = 0;
+
+            for (int j = 0; j < i; j++) {
+                leftSum += arr[j];
+            }
+
+            for (int j = arr.length - 1; j > i; j--) {
+                rightSum += arr[j];
+            }
+
+            if (leftSum == rightSum) return i;
+
+        }
+
+        return -1;
 
     }
 
