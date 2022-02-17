@@ -20,8 +20,45 @@ public class Training {
                 true, true, true, true,
                 false, false, true, true};
 
-        System.out.println(Arrays.toString(wave("two words")));
-        //System.out.println(GetSum(0, 5));
+        //System.out.println(Arrays.toString(wave("two words")));
+        System.out.println(sequence(new int[]{-2, 1, 1, 4, -1, 2, 1, -5, 4}));
+
+    }
+
+
+    public static int sequence(int[] arr) {
+
+        int result = 0;
+
+        if (arr.length == 0 || Arrays.stream(arr).max().getAsInt() <= 0) {
+            return result;
+        }
+
+        if (Arrays.stream(arr).allMatch(value -> value > 0)) {
+            return Arrays.stream(arr).sum();
+        }
+
+        int sum = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+
+            if (sum < 0) {
+                sum = 0;
+            }
+
+            sum += arr[i];
+
+            if (sum > result) {
+                result = sum;
+            }
+
+        }
+
+        return result;
+
+        // The maximum sum subarray problem consists in finding the maximum sum of a contiguous subsequence in an array or list of integers:
+        // Max.sequence(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4});
+        // should be 6: {4, -1, 2, 1}
 
     }
 
@@ -36,7 +73,7 @@ public class Training {
 
             if (str.charAt(i) != ' ') {
 
-                result[arrIndex] = str.substring(0, i) + str.substring(i, i+1).toUpperCase() + str.substring(i+1);
+                result[arrIndex] = str.substring(0, i) + str.substring(i, i + 1).toUpperCase() + str.substring(i + 1);
 
                 arrIndex++;
 
