@@ -21,7 +21,79 @@ public class Training {
                 false, false, true, true};
 
         //System.out.println(Arrays.toString(wave("two words")));
-        System.out.println(sequence(new int[]{-2, 1, 1, 4, -1, 2, 1, -5, 4}));
+        //System.out.println(sequence(new int[]{-2, 1, 1, 4, -1, 2, 1, -5, 4}));
+
+        System.out.println(longest("aretheyhere", "yestheyarehere"));
+
+    }
+
+
+    public static String longest(String s1, String s2) {
+
+        String result = "";
+
+        char[] arr = (s1 + s2).toCharArray();
+
+        Arrays.sort(arr);
+
+        for (char c : arr) {
+            if (result.indexOf(c) < 0) {
+                result += c;
+            }
+        }
+
+        return result;
+
+        //Take 2 strings s1 and s2 including only letters from ato z. Return a new sorted string, the longest possible, containing distinct letters - each taken only once - coming from s1 or s2.
+
+    }
+
+
+    public static boolean comp(int[] a, int[] b) {
+
+        //https://www.codewars.com/kata/550498447451fbbd7600041c/train/java
+
+        int squareCount = 0;
+
+        if (a == null || b == null) return false;
+
+        if (b.length == 0) return true;
+
+        //if (a.length == 0 || b.length == 0) return false;
+
+        //if (a.length != b.length) return false;
+
+        for (int i = 0; i < a.length; i++) {
+
+            int aa = (int) Arrays.stream(a).sorted().toArray()[i];
+            int bb = (int) Arrays.stream(b).sorted().toArray()[i];
+
+            if (aa * aa == bb) {
+                squareCount++;
+            }
+
+        }
+
+
+        return squareCount == b.length;
+
+//        for (int elemB : b) {
+//
+//            if (Arrays.stream(a).anyMatch(value -> value*value == elemB)) {
+//                squareCount++;
+//            }
+//
+//        }
+//
+//        for (int elemA : a) {
+//
+//            if (Arrays.stream(b).anyMatch(value -> value == elemA*elemA)) {
+//                squareCount++;
+//            }
+//
+//        }
+//
+//        return squareCount == a.length*3;
 
     }
 
