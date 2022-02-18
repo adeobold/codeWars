@@ -22,9 +22,56 @@ public class Training {
 
         //System.out.println(Arrays.toString(tribonacci(new double []{1,1,1},10)));
         //System.out.println(sequence(new int[]{-2, 1, 1, 4, -1, 2, 1, -5, 4}));
-        System.out.println(findIt(new int[]{20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5}));
+        System.out.println(Arrays.toString(dirReduc(new String[]{"NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"})));
 
     }
+
+    public static String[] dirReduc(String[] arr) {
+
+        int i = 0;
+        int j = 0;
+
+        while (i < arr.length - 1) {
+
+            if (arr[i] == "") {
+                i++;
+            } else {
+
+                j = i + 1;
+
+                while (j < arr.length && arr[j] == "") {
+                    j++;
+                }
+
+                if (j == arr.length) break;
+
+                if (
+                        (arr[i] == "NORTH" && arr[j] == "SOUTH") ||
+                                (arr[i] == "SOUTH" && arr[j] == "NORTH") ||
+                                (arr[i] == "EAST" && arr[j] == "WEST") ||
+                                (arr[i] == "WEST" && arr[j] == "EAST")
+                ) {
+                    arr[i] = "";
+                    arr[j] = "";
+                    i = 0;
+                } else {
+                    i++;
+                }
+
+            }
+
+        }
+
+        List<String> list = new ArrayList<>();
+
+        for (String s : arr) {
+            if (s != "") list.add(s);
+        }
+
+        return list.toArray(new String[0]);
+
+    }
+
 
     public static int findIt(int[] a) {
 
@@ -56,7 +103,6 @@ public class Training {
         //    return xor;
 
     }
-
 
 
     public static double[] tribonacci(double[] s, int n) {
