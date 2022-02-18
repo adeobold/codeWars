@@ -20,11 +20,44 @@ public class Training {
                 true, true, true, true,
                 false, false, true, true};
 
-        System.out.println(Arrays.toString(tribonacci(new double []{1,1,1},10)));
+        //System.out.println(Arrays.toString(tribonacci(new double []{1,1,1},10)));
         //System.out.println(sequence(new int[]{-2, 1, 1, 4, -1, 2, 1, -5, 4}));
-        //System.out.println(camelCase("camelcasingtest"));
+        System.out.println(findIt(new int[]{20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5}));
 
     }
+
+    public static int findIt(int[] a) {
+
+//        List asList = Arrays.asList(a);
+//        Set<Integer> mySet = new HashSet<Integer>(asList);
+
+        int result = 0;
+
+        for (int i : a) {
+
+            result = 0;
+
+            for (int j : a) {
+
+                if (i == j) result++;
+
+            }
+
+            if (result % 2 != 0) return i;
+
+        }
+
+        return -1;
+
+        //int xor = 0;
+        //    for (int i = 0; i < A.length; i++) {
+        //      xor ^= A[i];
+        //    }
+        //    return xor;
+
+    }
+
+
 
     public static double[] tribonacci(double[] s, int n) {
 
