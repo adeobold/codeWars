@@ -22,9 +22,139 @@ public class Training {
 
         //System.out.println(Arrays.toString(tribonacci(new double []{1,1,1},10)));
         //System.out.println(sequence(new int[]{-2, 1, 1, 4, -1, 2, 1, -5, 4}));
-        System.out.println(Arrays.toString(dirReduc(new String[]{"NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"})));
+        System.out.println(toRoman(1666));
+        System.out.println(fromRoman("MCMXC"));
+
 
     }
+
+    public static String toRoman(int n) {
+
+        String result = "";
+
+        int thousands = (n / 1000) % 10;
+        int hundreds = (n / 100) % 10;
+        int dozens = (n / 10) % 10;
+        int numbers = n % 10;
+
+        for (int i = 0; i < thousands; i++) {
+            result += "M";
+        }
+
+        if (hundreds < 4) {
+            for (int i = 0; i < hundreds; i++) {
+                result += "C";
+            }
+        } else if (hundreds == 4) {
+            result += "CD";
+        } else if (hundreds < 9) {
+            result += "D";
+            for (int i = 0; i < hundreds - 5; i++) {
+                result += "C";
+            }
+        } else {
+            result += "CM";
+        }
+
+        if (dozens < 4) {
+            for (int i = 0; i < dozens; i++) {
+                result += "X";
+            }
+        } else if (dozens == 4) {
+            result += "XL";
+        } else if (dozens < 9) {
+            result += "L";
+            for (int i = 0; i < dozens - 5; i++) {
+                result += "X";
+            }
+        } else {
+            result += "XC";
+        }
+
+        if (numbers < 4) {
+            for (int i = 0; i < numbers; i++) {
+                result += "I";
+            }
+        } else if (numbers == 4) {
+            result += "IV";
+        } else if (numbers < 9) {
+            result += "V";
+            for (int i = 0; i < numbers - 5; i++) {
+                result += "I";
+            }
+        } else {
+            result += "IX";
+        }
+
+        return result;
+    }
+
+    public static int fromRoman(String romanNumeral) {
+
+        int result = 0;
+
+        if (romanNumeral.contains("IV")) {
+            result += 4;
+            romanNumeral = romanNumeral.replace("IV", "");
+        }
+
+        if (romanNumeral.contains("IX")) {
+            result += 9;
+            romanNumeral = romanNumeral.replace("IX", "");
+        }
+
+        if (romanNumeral.contains("XL")) {
+            result += 40;
+            romanNumeral = romanNumeral.replace("XL", "");
+        }
+
+        if (romanNumeral.contains("XC")) {
+            result += 90;
+            romanNumeral = romanNumeral.replace("XC", "");
+        }
+
+        if (romanNumeral.contains("CD")) {
+            result += 400;
+            romanNumeral = romanNumeral.replace("CD", "");
+        }
+
+        if (romanNumeral.contains("CM")) {
+            result += 900;
+            romanNumeral = romanNumeral.replace("CM", "");
+        }
+
+        for (Character ch : romanNumeral.toCharArray()) {
+
+            switch (ch) {
+                case 'I':
+                    result += 1;
+                    break;
+                case 'V':
+                    result += 5;
+                    break;
+                case 'X':
+                    result += 10;
+                    break;
+                case 'L':
+                    result += 50;
+                    break;
+                case 'C':
+                    result += 100;
+                    break;
+                case 'D':
+                    result += 500;
+                    break;
+                case 'M':
+                    result += 1000;
+                    break;
+            }
+
+        }
+
+        return result;
+
+    }
+
 
     public static String[] dirReduc(String[] arr) {
 
@@ -122,7 +252,7 @@ public class Training {
             } else if (i == 2) {
                 result[2] = s[2];
             } else {
-                result[i] = result[i-1] + result[i-2]+ result[i-3];
+                result[i] = result[i - 1] + result[i - 2] + result[i - 3];
             }
 
         }
