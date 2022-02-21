@@ -22,9 +22,52 @@ public class Training {
 
         //System.out.println(Arrays.toString(tribonacci(new double []{1,1,1},10)));
         //System.out.println(sequence(new int[]{-2, 1, 1, 4, -1, 2, 1, -5, 4}));
-        System.out.println(toRoman(1666));
-        System.out.println(fromRoman("MCMXC"));
+//        System.out.println(toRoman(1666));
+//        System.out.println(fromRoman("MCMXC"));
 
+        System.out.println(dblLinear(50));
+
+    }
+
+    public static int dblLinear(int n) {
+
+        //https://www.codewars.com/kata/5672682212c8ecf83e000050/train/java
+
+        SortedSet<Integer> arr = new TreeSet<>();
+
+        arr.add(1);
+
+        ArrayList<Integer> lstToSolve = new ArrayList<>();
+        ArrayList<Integer> lstNewItems = new ArrayList<>();
+
+        lstToSolve.add(1);
+
+        int counter = 0;
+
+        while (counter <= n / 3) {
+
+            lstNewItems.clear();
+
+            for (int i = 0; i < lstToSolve.size(); i++) {
+
+                int x1 = 2 * lstToSolve.get(i) + 1;
+                int x2 = 3 * lstToSolve.get(i) + 1;
+
+                if (!arr.contains(x1)) arr.add(x1);
+                if (!arr.contains(x2)) arr.add(x2);
+
+                lstNewItems.add(x1);
+                lstNewItems.add(x2);
+
+            }
+
+            lstToSolve = new ArrayList<>(lstNewItems);
+
+            counter++;
+
+        }
+
+        return arr.stream().collect(Collectors.toList()).get(n);
 
     }
 
