@@ -25,9 +25,55 @@ public class Training {
 //        System.out.println(toRoman(1666));
 //        System.out.println(fromRoman("MCMXC"));
 
-        System.out.println(dblLinear(50));
+        //System.out.println(dblLinear(50));
+
+        System.out.println(determinant(new int[][]{{2,5,3}, {1,-2,-1}, {1, 3, 4}}));
 
     }
+
+    public static int determinant(int[][] matrix) {
+
+        if (matrix.length == 1) return matrix[0][0];
+
+        if (matrix.length == 2) return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+
+        if (matrix.length > 2) {
+
+            int result = 0;
+
+            for (int i = 0; i < matrix.length; i++) {
+
+                int sign = 1;
+                if (i % 2 != 0) sign = -1;
+
+                int[][] newArray = new int[matrix.length - 1][matrix.length - 1];
+
+                int newArrayI = 0;
+                int newArrayJ;
+
+                for (int j = 1; j < matrix.length; j++) {
+                    newArrayJ = 0;
+                    for (int k = 0; k < matrix.length; k++) {
+                        if (k != i) {
+                            newArray[newArrayI][newArrayJ] = matrix[j][k];
+                            newArrayJ++;
+                        }
+                    }
+                    newArrayI++;
+                }
+
+                result += sign * matrix[0][i] * determinant(newArray);
+
+            }
+
+            return result;
+
+        }
+
+        return 0;
+
+    }
+
 
     public static int dblLinear(int n) {
 
