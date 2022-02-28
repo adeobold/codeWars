@@ -43,9 +43,58 @@ public class Training {
         System.out.println(justify(ttt, 14));
         */
 
-
+        System.out.println(rangeExtraction(new int[] {-6,-3,-2,-1,0,1,3,4,5,7,8,9,10,11,14,15,17,18,19,20}));
 
     }
+
+    public static String rangeExtraction(int[] arr) {
+
+        String result = "";
+
+        int rangeCount = 0;
+        Integer rangeStart = arr[0];
+        Integer rangeEnd = arr[0];
+        int prevValue = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+
+            if (arr[i] - prevValue == 1) {
+                rangeCount++;
+                rangeEnd = arr[i];
+            } else {
+                if (result != "") result += ",";
+                if (rangeCount > 1) {
+                    result += rangeStart + "-" + rangeEnd;
+                } else if (rangeStart == rangeEnd) {
+                    result += rangeStart;
+                }
+                else
+                {
+                    result += rangeStart + "," + rangeEnd;
+                }
+                rangeCount = 0;
+                rangeStart = arr[i];
+                rangeEnd = arr[i];
+            }
+
+            prevValue = arr[i];
+
+        }
+
+        if (result != "") result += ",";
+        if (rangeCount > 1) {
+            result += rangeStart + "-" + rangeEnd;
+        } else if (rangeStart == rangeEnd) {
+            result += rangeStart;
+        }
+        else
+        {
+            result += rangeStart + "," + rangeEnd;
+        }
+
+        return result;
+    }
+
 
     public static String justify(String text, int width) {
 
