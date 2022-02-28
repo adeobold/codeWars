@@ -27,9 +27,110 @@ public class Training {
 
         //System.out.println(dblLinear(50));
 
-        System.out.println(determinant(new int[][]{{2,5,3}, {1,-2,-1}, {1, 3, 4}}));
+        //System.out.println(determinant(new int[][]{{2, 5, 3}, {1, -2, -1}, {1, 3, 4}}));
+
+        /*String LIPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sa"
+                + "gittis dolor mauris, at elementum ligula tempor eget. In quis rhoncus nunc, at aliquet orci. Fusc"
+                + "e at dolor sit amet felis suscipit tristique. Nam a imperdiet tellus. Nulla eu vestibulum urna. V"
+                + "ivamus tincidunt suscipit enim, nec ultrices nisi volutpat ac. Maecenas sit amet lacinia arcu, no"
+                + "n dictum justo. Donec sed quam vel risus faucibus euismod. Suspendisse rhoncus rhoncus felis at f"
+                + "ermentum. Donec lorem magna, ultricies a nunc sit amet, blandit fringilla nunc. In vestibulum vel"
+                + "it ac felis rhoncus pellentesque. Mauris at tellus enim. Aliquam eleifend tempus dapibus. Pellent"
+                + "esque commodo, nisi sit amet hendrerit fringilla, ante odio porta lacus, ut elementum justo nulla"
+                + " et dolor.";
+
+
+        System.out.println(justify(ttt, 14));
+        */
+
+
 
     }
+
+    public static String justify(String text, int width) {
+
+        if (text.length() <= width || text == "") return text;
+
+        StringBuilder justifiedText = new StringBuilder();
+        StringBuilder word = new StringBuilder();
+        StringBuilder line = new StringBuilder();
+
+        int i = 0;
+
+        text += " ";
+
+        while (i < text.length()) {
+
+            word.append(text.charAt(i));
+
+            if (text.charAt(i) == ' ') {
+
+                if (line.length() + word.toString().trim().length() > width) {
+                    if (justifiedText.length() != 0) justifiedText.append("\n");
+                    justifiedText.append(line.toString().trim());
+                    line.delete(0, line.length());
+                }
+
+                line.append(word);
+                word.delete(0, word.length());
+
+            }
+
+            i++;
+
+        }
+
+        if (justifiedText.length() != 0) justifiedText.append("\n");
+        justifiedText.append(line.toString().trim());
+
+        String[] arr = justifiedText.toString().split("\n");
+
+        justifiedText = new StringBuilder();
+
+        for (int k = 0; k < arr.length - 1; k++) {
+
+            String tmp = arr[k];
+
+            if (tmp.contains(" ")) {
+
+                String[] tmpArr = tmp.split(" ");
+                int[] spaces = new int[tmpArr.length - 1];
+
+                while (tmp.replace(" ", "").length() + Arrays.stream(spaces).sum() < width) {
+
+                    for (int l = 0; l < spaces.length; l++) {
+                        spaces[l]++;
+                        if (tmp.replace(" ", "").length() + Arrays.stream(spaces).sum() == width) {
+                            break;
+                        }
+                    }
+
+                }
+
+                int spaceIndex = 0;
+                for (String s : tmpArr) {
+
+                    if (spaceIndex < spaces.length) {
+                        justifiedText.append(s).append(" ".repeat(spaces[spaceIndex]));
+                    } else {
+                        justifiedText.append(s).append("\n");
+                    }
+
+
+                    spaceIndex++;
+                }
+
+            } else {
+                justifiedText.append(tmp).append("\n");
+            }
+
+        }
+
+        justifiedText.append(arr[arr.length - 1]);
+        return justifiedText.toString();
+
+    }
+
 
     public static int determinant(int[][] matrix) {
 
