@@ -43,7 +43,47 @@ public class Training {
         System.out.println(justify(ttt, 14));
         */
 
-        System.out.println(rangeExtraction(new int[] {-6,-3,-2,-1,0,1,3,4,5,7,8,9,10,11,14,15,17,18,19,20}));
+        //System.out.println(rangeExtraction(new int[] {-6,-3,-2,-1,0,1,3,4,5,7,8,9,10,11,14,15,17,18,19,20}));
+
+        System.out.println(formatDuration(120));
+
+    }
+
+
+    public static String formatDuration(int seconds) {
+
+        String result = "";
+
+        int years = seconds / 31536000;
+        int days = (seconds - years*31536000)/86400;
+        int hours = (seconds - years*31536000 - days*86400)/3600;
+        int minutes = (seconds - years*31536000 - days*86400 - hours*3600)/60;
+        seconds = seconds - years*31536000 - days*86400 - hours*3600 - minutes*60;
+
+        if (years > 0) result += years + " year";
+        if (years > 1) result += "s";
+
+        if (result != "" && days != 0) result += ", ";
+        if (days > 0) result += days + " day";
+        if (days > 1) result += "s";
+
+        if (result != "" && hours != 0) result += ", ";
+        if (hours > 0) result += hours + " hour";
+        if (hours > 1) result += "s";
+
+        if (result != "" && minutes != 0) result += ", ";
+        if (minutes > 0) result += minutes + " minute";
+        if (minutes > 1) result += "s";
+
+        if (result != "" && seconds != 0) result += ", ";
+        if (seconds > 0) result += seconds + " second";
+        if (seconds > 1) result += "s";
+
+        if (result.contains(",")) {
+            result = result.substring(0, result.lastIndexOf(",")) + " and" + result.substring(result.lastIndexOf(",") + 1);
+        }
+
+        return result;
 
     }
 
