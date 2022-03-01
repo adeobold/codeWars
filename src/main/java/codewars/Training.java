@@ -45,7 +45,70 @@ public class Training {
 
         //System.out.println(rangeExtraction(new int[] {-6,-3,-2,-1,0,1,3,4,5,7,8,9,10,11,14,15,17,18,19,20}));
 
-        System.out.println(formatDuration(120));
+        //System.out.println(formatDuration(120));
+
+//        int[][] sudoku = {
+//                {5, 3, 4, 6, 7, 8, 9, 1, 2},
+//                {6, 7, 2, 1, 9, 5, 3, 4, 8},
+//                {1, 9, 8, 3, 4, 2, 5, 6, 7},
+//                {8, 5, 9, 7, 6, 1, 4, 2, 3},
+//                {4, 2, 6, 8, 5, 3, 7, 9, 1},
+//                {7, 1, 3, 9, 2, 4, 8, 5, 6},
+//                {9, 6, 1, 5, 3, 7, 2, 8, 4},
+//                {2, 8, 7, 4, 1, 9, 6, 3, 5},
+//                {3, 4, 5, 2, 8, 6, 1, 7, 9}
+//        };
+//
+//        System.out.println(check(sudoku));
+
+
+
+
+
+
+
+    }
+
+
+    public static boolean check(int[][] sudoku) {
+
+        for (int i = 0; i < sudoku.length; i++) {
+
+            int[] horizontalLine = sudoku[i];
+            if (Arrays.stream(horizontalLine).distinct().count() != 9) return false;
+            if (Arrays.stream(horizontalLine).anyMatch(value -> value == 0)) return false;
+
+            int[] verticalLine = new int[sudoku.length];
+            for (int j = 0; j < sudoku.length; j++) {
+                verticalLine[j] = sudoku[i][j];
+            }
+            if (Arrays.stream(verticalLine).distinct().count() != 9) return false;
+            if (Arrays.stream(verticalLine).anyMatch(value -> value == 0)) return false;
+
+        }
+
+        int[] subMatrix = new int[9];
+
+        for (int i = 0; i < sudoku.length - 3; i+=3) {
+            for (int j = 0; j < sudoku.length - 3; j+=3) {
+
+                subMatrix[0] = sudoku[i][j];
+                subMatrix[1] = sudoku[i][j + 1];
+                subMatrix[2] = sudoku[i][j + 2];
+                subMatrix[3] = sudoku[i + 1][j];
+                subMatrix[4] = sudoku[i + 1][j + 1];
+                subMatrix[5] = sudoku[i + 1][j + 2];
+                subMatrix[6] = sudoku[i + 2][j];
+                subMatrix[7] = sudoku[i + 2][j + 1];
+                subMatrix[8] = sudoku[i + 2][j + 2];
+
+                if (Arrays.stream(subMatrix).distinct().count() != 9) return false;
+
+            }
+        }
+
+        return true;
+
 
     }
 
