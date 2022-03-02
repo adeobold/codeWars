@@ -2,6 +2,7 @@ package codewars;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.math.BigInteger;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -61,12 +62,78 @@ public class Training {
 //
 //        System.out.println(check(sudoku));
 
+        //System.out.println(countOnes(12,29));
+
+        System.out.println(stripComments("apples, pears # and bananas\ngrapes\nbananas !apples", new String[]{"#", "!"}));
 
 
+    }
+
+    public static String stripComments(String text, String[] commentSymbols) {
+
+        String result = "";
+        String[] arr = text.split("\n");
+
+        for (int i = 0; i < arr.length; i++) {
+
+            for (String c : commentSymbols) {
+
+                if (arr[i].length() > 0 && arr[i].contains(c)) {
+                    arr[i] = arr[i].substring(0,arr[i].indexOf(c));
+                }
+
+            }
+
+            result += arr[i].replaceAll("\\s+$", "");
+
+            if (i < arr.length - 1) result += "\n";
+
+        }
+
+        return result;
+
+    }
 
 
+    public static BigInteger countOnes(long left, long right) {
+
+        BigInteger result = BigInteger.valueOf(0);
+
+        int digitsCount = Long.toBinaryString(left).length();
+        for (long i = left; i <= right; i++) {
+            if (digitsCount < Long.toBinaryString(i).length()) {
+                break;
+            }
+            ;
+            result = result.add(BigInteger.valueOf(Long.bitCount(i)));
+        }
+
+        if (Long.toBinaryString(left).length() != Long.toBinaryString(right).length()) {
+            digitsCount = Long.toBinaryString(right).length();
+            for (long i = right; i >= left; i--) {
+                if (digitsCount > Long.toBinaryString(i).length()) {
+                    break;
+                }
+                ;
+                result = result.add(BigInteger.valueOf(Long.bitCount(i)));
+            }
+        }
+
+        for (int i = Long.toBinaryString(left).length() + 1; i <= Long.toBinaryString(right).length() - 1; i++) {
+            result = result.add(BigInteger.valueOf((long) Math.pow(2, i)));
+        }
+
+        return result;
 
 
+//        long result = 0l;
+//        System.out.println(Long.toBinaryString(left));
+//        System.out.println(Long.toBinaryString(right));
+//        for (long i = left; i <= right; i++) {
+//            System.out.println(Long.toBinaryString(i));
+//            result += Long.bitCount(i);
+//        }
+//        return BigInteger.valueOf(result);
     }
 
 
@@ -89,8 +156,8 @@ public class Training {
 
         int[] subMatrix = new int[9];
 
-        for (int i = 0; i < sudoku.length - 3; i+=3) {
-            for (int j = 0; j < sudoku.length - 3; j+=3) {
+        for (int i = 0; i < sudoku.length - 3; i += 3) {
+            for (int j = 0; j < sudoku.length - 3; j += 3) {
 
                 subMatrix[0] = sudoku[i][j];
                 subMatrix[1] = sudoku[i][j + 1];
@@ -118,10 +185,10 @@ public class Training {
         String result = "";
 
         int years = seconds / 31536000;
-        int days = (seconds - years*31536000)/86400;
-        int hours = (seconds - years*31536000 - days*86400)/3600;
-        int minutes = (seconds - years*31536000 - days*86400 - hours*3600)/60;
-        seconds = seconds - years*31536000 - days*86400 - hours*3600 - minutes*60;
+        int days = (seconds - years * 31536000) / 86400;
+        int hours = (seconds - years * 31536000 - days * 86400) / 3600;
+        int minutes = (seconds - years * 31536000 - days * 86400 - hours * 3600) / 60;
+        seconds = seconds - years * 31536000 - days * 86400 - hours * 3600 - minutes * 60;
 
         if (years > 0) result += years + " year";
         if (years > 1) result += "s";
@@ -170,9 +237,7 @@ public class Training {
                     result += rangeStart + "-" + rangeEnd;
                 } else if (rangeStart == rangeEnd) {
                     result += rangeStart;
-                }
-                else
-                {
+                } else {
                     result += rangeStart + "," + rangeEnd;
                 }
                 rangeCount = 0;
@@ -189,9 +254,7 @@ public class Training {
             result += rangeStart + "-" + rangeEnd;
         } else if (rangeStart == rangeEnd) {
             result += rangeStart;
-        }
-        else
-        {
+        } else {
             result += rangeStart + "," + rangeEnd;
         }
 
