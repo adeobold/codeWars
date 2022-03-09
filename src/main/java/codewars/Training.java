@@ -64,10 +64,95 @@ public class Training {
 
         //System.out.println(countOnes(12,29));
 
-        System.out.println(stripComments("apples, pears # and bananas\ngrapes\nbananas !apples", new String[]{"#", "!"}));
+        //System.out.println(stripComments("apples, pears # and bananas\ngrapes\nbananas !apples", new String[]{"#", "!"}));
 
+        int[][] array
+                = {{1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}};
+
+        int[][] array2 = {{}};
+        System.out.println(Arrays.toString(snail(array2)));
 
     }
+
+    public static int[] snail(int[][] array) {
+
+        if (array == null) return new int[0];
+        if (array.length == 0) return new int[0];
+        if (array.length == 1 && array[0].length == 0) return new int[0];
+
+        int[] result = new int[array.length * array.length];
+
+        int i = 0;
+        int j = 0;
+
+        int resultArrayIndex = 0;
+
+        while (true) {
+
+            while (j < array.length) {
+                if (array[i][j] == Integer.MIN_VALUE) {
+                    break;
+                }
+                result[resultArrayIndex] = array[i][j];
+                resultArrayIndex++;
+                array[i][j] = Integer.MIN_VALUE;
+                j++;
+            }
+
+            j--;
+            i++;
+
+            while (i < array.length) {
+                if (array[i][j] == Integer.MIN_VALUE) {
+                    break;
+                }
+                result[resultArrayIndex] = array[i][j];
+                resultArrayIndex++;
+                array[i][j] = Integer.MIN_VALUE;
+                i++;
+            }
+
+            j--;
+            i--;
+
+            while (j >= 0) {
+                if (array[i][j] == Integer.MIN_VALUE) {
+                    break;
+                }
+                result[resultArrayIndex] = array[i][j];
+                resultArrayIndex++;
+                array[i][j] = Integer.MIN_VALUE;
+                j--;
+            }
+
+            j++;
+            i--;
+
+            while (i >= 0) {
+                if (array[i][j] == Integer.MIN_VALUE) {
+                    break;
+                }
+                result[resultArrayIndex] = array[i][j];
+                resultArrayIndex++;
+                array[i][j] = Integer.MIN_VALUE;
+                i--;
+            }
+
+            i++;
+            j++;
+
+            if (resultArrayIndex == array.length * array.length) {
+                break;
+            }
+
+        }
+
+        return result;
+
+    }
+
 
     public static String stripComments(String text, String[] commentSymbols) {
 
@@ -79,7 +164,7 @@ public class Training {
             for (String c : commentSymbols) {
 
                 if (arr[i].length() > 0 && arr[i].contains(c)) {
-                    arr[i] = arr[i].substring(0,arr[i].indexOf(c));
+                    arr[i] = arr[i].substring(0, arr[i].indexOf(c));
                 }
 
             }
